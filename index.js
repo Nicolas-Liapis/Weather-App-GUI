@@ -16,7 +16,7 @@ export default class Boxy extends Component {
   }
   render() {
     return (
-      <div class="box trasnform" onClick={this.handleClick}></div>
+      <div class="box trasnform" onClick={this.handleClick}><h2>Click me to move me</h2></div>
 
 
     );
