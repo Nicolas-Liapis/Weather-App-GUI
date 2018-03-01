@@ -44,12 +44,12 @@ export default class Iphone_Container extends Component {
 		this.fetchWeatherData();
 	}
 
-	
+
 	// the main render method for the iphone container component
 	render() {
 		// check if temperature data is fetched, if so add the sign styling to the page
 		// const tempStyles = this.state.temp ? `${style.temperature} ${style.filled}` : style.temperature;
-		
+
 
 		// display all weather data
 		return (
@@ -77,7 +77,7 @@ export default class Iphone_Container extends Component {
 				</div>
 
 					{/* add 'Back' button to toggle-off opacity of Setting View container (Default CSS style has opacity set to zero) */}
-				<div className={this.state.settingsBackButtonClassName}> 
+				<div className={this.state.settingsBackButtonClassName}>
 					< SettingsButton clickFunction={this.toggleSettingsView} / >
 				</div>
 				<div className={this.state.settingsBackTextClassName}>Back</div>
@@ -86,13 +86,13 @@ export default class Iphone_Container extends Component {
 				<div className={this.state.settingsButtonClassName}>
 					< SettingsButton clickFunction={this.toggleSettingsView} / >
 				</div>
-				
+
 					{/* add screen-left button to transition to Day View */}
 				<div class={this.state.buttonLeftClassName}>
 					< SwipeButton clickFunction={ this.swipeRight } / >
 				</div>
 				<div class={this.state.arrowLeftClassName}></div>
-	
+
 					{/* add screen-right button to transition to Week View (default CSS style has zero opacity) */}
 				<div class={this.state.buttonRightClassName}>
 					< SwipeButton clickFunction={ this.swipeLeft }/ >
@@ -114,40 +114,40 @@ export default class Iphone_Container extends Component {
 
 		// user data currently hard-coded. Would be good to be loading this from a cache instead - so that we can use the settings page to update the cache values.
 		this.setState({
-			home : localStorage.inputFirst,
-			work : localStorage.inputSecond,
-			amStartHours : "08",
-			amStartMins : "10",
-			amEndHours : "09",
-			amEndMins : "30",
-			pmStartHours : "17",
-			pmStartMins : "40",
-			pmEndHours : "19",
-			pmEndMins : "00"
-		})			
+			home : localStorage.inputHome,
+			work : localStorage.inputWork,
+			amStartHours : localStorage.amHoursStart,
+			amStartMins : localStorage.amMinsStart,
+			amEndHours : localStorage.amHoursEnd,
+			amEndMins : localStorage.amMinsEnd,
+			pmStartHours : localStorage.pmHoursStart,
+			pmStartMins : localStorage.pmMinsStart,
+			pmEndHours : localStorage.pmHoursEnd,
+			pmEndMins : localStorage.pmMinsEnd,
+		})
 	}
 
-	// Function: gets weather data from API, using user data 
+	// Function: gets weather data from API, using user data
 	fetchWeatherData = (home, work) => {
-		
+
 		// Insert API calls here...
 
 		// extract relevant data values from returned API data
 		this.parseResponse({}); // doesn't pass in any retrieved data yet - data values are hard coded in the parseResponse function
 
 		// Currently the parseResponse function is creating both the AM and PM data in one execution.
-		// if possible need to set up 2 API calls (one for home/work) and parse both responses. 
+		// if possible need to set up 2 API calls (one for home/work) and parse both responses.
 
 	}
 
-	// Function: parses API response data and extracts relevant data 
+	// Function: parses API response data and extracts relevant data
 	parseResponse = (parsed_json) => {
 		// var day = parsed_json['current_observation']['temp_c'];
 		// var date = parsed_json['current_observation']['temp_c'];
 
 		// var amTemperature = parsed_json['current_observation']['temp_c'];
 		// var amConditions = parsed_json['current_observation']['weather'];
-		
+
 		// var amTime1 = parsed_json['current_observation']['weather'];
 		// var amPop1 = parsed_json[]
 		// var amWind1 = parsed_json[]
@@ -157,12 +157,12 @@ export default class Iphone_Container extends Component {
 		// var amPop2 = parsed_json[]
 		// var amWind2 = parsed_json[]
 		// var amTemp2 = parsed_json[]
-		
+
 		// var amTime3 = parsed_json[]
 		// var amPop3 = parsed_json[]
 		// var amWind3 = parsed_json[]
 		// var amTemp3 = parsed_json[]
-		
+
 		// var amTime2 = parsed_json[]
 		// var amPop2 = parsed_json[]
 		// var amWind2 = parsed_json[]
@@ -179,12 +179,12 @@ export default class Iphone_Container extends Component {
 		// var pmPop2 = parsed_json[]
 		// var pmWind2 = parsed_json[]
 		// var pmTemp2 = parsed_json[]
-		
+
 		// var pmTime3 = parsed_json[]
 		// var pmPop3 = parsed_json[]
 		// var pmWind3 = parsed_json[]
 		// var pmTemp3 = parsed_json[]
-		
+
 		// var pmTime2 = parsed_json[]
 		// var pmPop2 = parsed_json[]
 		// var pmWind2 = parsed_json[]
@@ -267,7 +267,7 @@ export default class Iphone_Container extends Component {
 
 			day3 : "Friday",
 			day3AM : "cloudy",
-			day3PM : "chancerain",			
+			day3PM : "chancerain",
 
 			day4 : "Saturday",
 			day4AM : "rain",
@@ -285,7 +285,7 @@ export default class Iphone_Container extends Component {
 			day7AM : "clear",
 			day7PM : "clear",
 
-		});      
+		});
 	}
 
 	// ----- Navigation functions -----
@@ -316,14 +316,14 @@ export default class Iphone_Container extends Component {
 
 	// Function: show / hide Settings View container - triggered from the user-symbol button oin the NavBar
 	toggleSettingsView = () => {
-		if (this.state.settingsViewClassName == style.settingsViewOff) { 
+		if (this.state.settingsViewClassName == style.settingsViewOff) {
 			// show Settings View, change navBar title, show the 'Back' button and hide the user-symbol button
 			this.setState({navBarTitle : "Settings"});
 			this.setState({settingsViewClassName: style.settingsViewOn});
 			this.setState({settingsButtonClassName: style.settingsButtonOff});
 			this.setState({settingsBackTextClassName: style.settingsBackTextOn});
 			this.setState({settingsBackButtonClassName: style.settingsBackButtonOn});
-		} else { 
+		} else {
 			// hide Settings View, navBar title, hide the 'Back' button and show the user-symbol button
 			this.setState({navBarTitle : "Weather App"});
 			this.setState({settingsViewClassName: style.settingsViewOff});
