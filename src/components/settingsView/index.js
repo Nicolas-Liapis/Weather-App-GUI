@@ -113,7 +113,8 @@ export default class SettingsView extends Component {
 		localStorage.amMinsEnd = amMinsEnd;
 		let pmMinsEnd = document.getElementById('pmMinsEnd').value;
 		localStorage.pmMinsEnd = pmMinsEnd;
-
+		
+		window.location.reload(true);
 
 
 		// If using a memory cache to store user data (instead of hard-coded values) we can use this form to update the user data cache - and therefore change the API reguest url.
