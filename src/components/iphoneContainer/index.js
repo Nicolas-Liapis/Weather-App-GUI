@@ -114,8 +114,8 @@ export default class Iphone_Container extends Component {
 
 		// user data currently hard-coded. Would be good to be loading this from a cache instead - so that we can use the settings page to update the cache values.
 		this.setState({
-			home : "Ealing Broadway",
-			work : "Westminster",
+			home : localStorage.inputFirst,
+			work : localStorage.inputSecond,
 			amStartHours : "08",
 			amStartMins : "10",
 			amEndHours : "09",
