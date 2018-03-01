@@ -9,19 +9,31 @@ import DoneButton from './doneButton';
 
 export default class SettingsView extends Component {
 
-
 	// render SettingsView component
 	render(props, state) {
+
+		// modify saved form values to show correct 24-hour clock representation ('04' instead of '4' etc) - form inputs parsed to Int when saving to storage in 'acceptChanges' function.
+		var homeValue = props.home;
+		var workValue = props.work;
+		var amStartHoursValue = (props.amStartHours > 10) ? props.amStartHours : '0' + props.amStartHours ;
+		var amStartMinsValue = (props.amStartMins > 10) ? props.amStartMins : '0' + props.amStartMins;
+		var amEndHoursValue = (props.amEndHours > 10) ? props.amEndHours : '0' + props.amEndHours;
+		var amEndMinsValue = (props.amEndMins > 10) ? props.amEndMins : '0' + props.amEndMins;
+		var pmStartHoursValue = (props.pmStartHours > 10) ? props.pmStartHours : '0' + props.pmStartHours;
+		var pmStartMinsValue = (props.pmStartMins > 10) ? props.pmStartMins : '0' + props.pmStartMins;
+		var pmEndHoursValue = (props.pmEndHours > 10) ? props.pmEndHours : '0' + props.pmEndHours;
+		var pmEndMinsValue = (props.pmEndMins > 10) ? props.pmEndMins : '0' + props.pmEndMins;
+
 		return (
 			<div class={style.settingsView}> {/* Add container */}
 
 				{/* Add Home Address - Form text field input and label to top of container */}
 				<div class={ style.homeAddressLabel }>Home Address</div>
-				<input id="inputHome" class={style.homeField } type="text" name="home" placeholder="Ealing" value={props.home} />
+				<input id="inputHome" class={style.homeField } type="text" name="home"  value={homeValue} />
 
 				{/* Add Work Address - Form text field input and label to top of container */}
 				<div class={ style.workAddressLabel }>Work Address</div>
-				<input id="inputWork" class={style.workField } type="text" name="work" placeholder="East Ham" value={props.work}/>
+				<input id="inputWork" class={style.workField } type="text" name="work"  value={workValue}/>
 
 				{/* Add divider line for formatting */}
 				<div class={ style.dividerLine1 }></div>
@@ -34,9 +46,9 @@ export default class SettingsView extends Component {
 					<div class={ style.startTime }>
 						<div class={ style.startTitle }>Starts</div>
 						<div class={ style.timeSelector }>
-							<input id="amHoursStart" class={ style.hours } dir="rtl" type="number" name="amStartHours" value={props.amStartHours} min="0" max="11" />
+							<input id="amHoursStart" class={ style.hours } dir="rtl" type="number" name="amStartHours" value={amStartHoursValue} min="0" max="11" />
 							:
-							<input id="amMinsStart" class={ style.minutes } type="number" name="amStartMinutes" value={props.amStartMins} step="10" min="0" max="50" />
+							<input id="amMinsStart" class={ style.minutes } type="number" name="amStartMinutes" value={pmStartMinsValue} step="10" min="0" max="50" />
 						</div>
 					</div>
 
@@ -44,9 +56,9 @@ export default class SettingsView extends Component {
 					<div class={ style.endTime }>
 						<div class={ style.endTitle }>Ends</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="amHoursEnd" class={ style.hours } dir="rtl" type="number" name="amEndHours" value={props.amEndHours} min="0" max="12" />
+							<input id="amHoursEnd" class={ style.hours } dir="rtl" type="number" name="amEndHours" value={amEndHoursValue} min="0" max="12" />
 							:
-							<input id="amMinsEnd" class={ style.minutes } type="number" name="amEndMinutes" value={props.amEndMins} step="10" min="0" max="50" />
+							<input id="amMinsEnd" class={ style.minutes } type="number" name="amEndMinutes" value={amEndMinsValue} step="10" min="0" max="50" />
 						</div>
 					</div>
 				</div>
@@ -59,9 +71,9 @@ export default class SettingsView extends Component {
 					<div class={ style.startTime }>
 						<div class={ style.startTitle }>Starts</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="pmHoursStart" class={ style.hours } dir="rtl" type="number" name="pmStartHours" value={props.pmStartHours} min="0" max="11" />
+							<input id="pmHoursStart" class={ style.hours } dir="rtl" type="number" name="pmStartHours" value={pmStartHoursValue} min="0" max="11" />
 							:
-							<input id="pmMinsStart" class={ style.minutes } type="number" name="pmStartMinutes" value={props.pmStartMins} step="10" min="0" max="50" />
+							<input id="pmMinsStart" class={ style.minutes } type="number" name="pmStartMinutes" value={pmStartMinsValue} step="10" min="0" max="50" />
 						</div>
 					</div>
 
@@ -69,9 +81,9 @@ export default class SettingsView extends Component {
 					<div class={ style.endTime }>
 						<div class={ style.endTitle }>Ends</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="pmHoursEnd" class={ style.hours } dir="rtl" type="number" name="pmEndHours" value={props.pmStartMins} min="0" max="12" />
+							<input id="pmHoursEnd" class={ style.hours } dir="rtl" type="number" name="pmEndHours" value={pmEndHoursValue} min="0" max="12" />
 							:
-							<input id="pmMinsEnd" class={ style.minutes } type="number" name="pmEndMinutes" value={props.pmEndMins} step="10" min="0" max="50" />
+							<input id="pmMinsEnd" class={ style.minutes } type="number" name="pmEndMinutes" value={pmEndMinsValue} step="10" min="0" max="50" />
 						</div>
 					</div>
 				</div>
@@ -97,23 +109,24 @@ export default class SettingsView extends Component {
 		localStorage.inputWork = inputWork;
 		//Saves am and pm start times
 		let amHoursStart = document.getElementById('amHoursStart').value;
-		localStorage.amHoursStart = amHoursStart;
+		localStorage.amHoursStart = parseInt(amHoursStart);
 		let pmHoursStart = document.getElementById('pmHoursStart').value;
-		localStorage.pmHoursStart = pmHoursStart;
+		localStorage.pmHoursStart = parseInt(pmHoursStart);
 		let amMinsStart = document.getElementById('amMinsStart').value;
-		localStorage.amMinsStart = amMinsStart;
+		localStorage.amMinsStart = parseInt(amMinsStart);
 		let pmMinsStart = document.getElementById('pmMinsStart').value;
-		localStorage.pmMinsStart = pmMinsStart;
+		localStorage.pmMinsStart = parseInt(pmMinsStart);
 		//Saves am and pm end times
 		let amHoursEnd = document.getElementById('amHoursEnd').value;
-		localStorage.amHoursEnd = amHoursEnd;
+		localStorage.amHoursEnd = parseInt(amHoursEnd);
 		let pmHoursEnd = document.getElementById('pmHoursEnd').value;
-		localStorage.pmHoursEnd = pmHoursEnd;
+		localStorage.pmHoursEnd = parseInt(pmHoursEnd);
 		let amMinsEnd = document.getElementById('amMinsEnd').value;
-		localStorage.amMinsEnd = amMinsEnd;
+		localStorage.amMinsEnd = parseInt(amMinsEnd);
 		let pmMinsEnd = document.getElementById('pmMinsEnd').value;
-		localStorage.pmMinsEnd = pmMinsEnd;
+		localStorage.pmMinsEnd = parseInt(pmMinsEnd);
 		
+
 		window.location.reload(true);
 
 

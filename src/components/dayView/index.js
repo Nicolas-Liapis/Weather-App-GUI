@@ -183,6 +183,9 @@ export default class DayView extends Component {
 						<div class={amSummaryIcon}></div>
 					</div>
 
+					{/* Add location label to conditions summary */}
+					<div class={style.amLocation}>{props.amLocation}</div>
+
 					{/* add 'am' section label and up/down layout indicator to bottom of AM section */}
 					<div class={style.amSplitBar}>
 						<div class={style.amLabel}>am</div>
@@ -220,6 +223,9 @@ export default class DayView extends Component {
 						<div class={style.pmLabel}>pm</div>
 						<div className={ this.state.pmIndicatorArrowClassName }></div>
 					</div>
+
+					{/* Add location label to conditions summary */}
+					<div class={style.pmLocation}>{props.pmLocation}</div>
 
 					{/* add commute summary Weather Conditions icon using data value from props */}
 					<div class={ style.pmConditions }>
@@ -295,6 +301,17 @@ export default class DayView extends Component {
 				}
 				break;
 
+			case "mostlycloudy" :
+			case "partlycloudy" :
+			case "partlysunny" : 
+			case "unknown" :
+				if (size == "small") {
+					return (timePeriod == "am") ? style_iconsSmall.partlyCloudy : style_iconsSmall.nt_partlyCloudy;
+				} else {
+					return (timePeriod == "am") ? style_iconsLarge.partlyCloudy : style_iconsLarge.nt_partlyCloudy;
+				}
+				break;
+
 			case "cloudy" :
 			case "fog" :
 			case "hazy" :
@@ -302,17 +319,6 @@ export default class DayView extends Component {
 					return (timePeriod == "am") ? style_iconsSmall.cloudy : style_iconsSmall.nt_cloudy;
 				} else {
 					return (timePeriod == "am") ? style_iconsLarge.cloudy : style_iconsLarge.nt_cloudy;
-				}
-				break;
-
-			case "mostlycloudy" :
-			case "partlycloudy" :
-			case "partlysunny" : 
-			case "unknown" :
-				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.mostlyCloudy : style_iconsSmall.nt_mostlyCloudy;
-				} else {
-					return (timePeriod == "am") ? style_iconsLarge.mostlyCloudy : style_iconsLarge.nt_mostlyCloudy;
 				}
 				break;
 
@@ -352,12 +358,12 @@ export default class DayView extends Component {
 				break;
 
 			case "cloudy" :
+			case "mostlycloudy" :
 			case "fog" :
 			case "hazy" :
 				return (timePeriod == "am") ? style_backgrounds.amCloudy : style_backgrounds.pmCloudy ;
 				break;
 
-			case "mostlycloudy" :
 			case "partlycloudy" :
 			case "partlysunny" : 
 			case "unknown" :

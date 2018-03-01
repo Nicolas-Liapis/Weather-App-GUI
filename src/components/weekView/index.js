@@ -121,16 +121,16 @@ export default class WeekView extends Component {
 				return (timePeriod == "am") ? style_iconsSmall.clear : style_iconsSmall.nt_clear ;
 				break;
 
+			case "mostlycloudy" :
+			case "partlycloudy" :
+			case "unknown" :
+				return (timePeriod == "am") ? style_iconsSmall.partlyCloudy : style_iconsSmall.nt_partlyCloudy;
+				break;
+
 			case "cloudy" :
 			case "fog" :
 			case "hazy" :
 				return (timePeriod == "am") ? style_iconsSmall.cloudy : style_iconsSmall.nt_cloudy;
-				break;
-
-			case "mostlycloudy" :
-			case "partlycloudy" :
-			case "unknown" :
-				return (timePeriod == "am") ? style_iconsSmall.mostlyCloudy : style_iconsSmall.nt_mostlyCloudy;
 				break;
 
 			case "chancerain" :

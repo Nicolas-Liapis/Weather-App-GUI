@@ -10,7 +10,18 @@ export default class App extends Component {
 
 	// once the components are loaded, checks if the url bar has a path with "ipad" in it, if so sets state of tablet to be true
 	componentDidMount() {
-
+		if (localStorage.getItem("inputHome") === null) {
+			localStorage.inputHome = "London";
+			localStorage.inputWork = "London";
+			localStorage.amHoursStart = 0;
+			localStorage.amMinsStart = 0;
+			localStorage.amHoursEnd = 0;
+			localStorage.amMinsEnd = 0;
+			localStorage.pmHoursStart = 0;
+			localStorage.pmMinsStart = 0;
+			localStorage.pmHoursEnd = 0;
+			localStorage.pmMinsEnd = 0;
+		}
 	}
 
 	/*

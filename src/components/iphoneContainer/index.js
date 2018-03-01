@@ -60,7 +60,7 @@ export default class Iphone_Container extends Component {
 
 					{/* add Day View container with props values from API parsed response */}
 				<div className={this.state.dayViewClassName}>
-					< DayView day={this.state.today} date={this.state.date} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOn} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
+					< DayView day={this.state.today} date={this.state.date} amLocation={this.state.home} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmLocation={this.state.work} pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOn} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
 				</div>
 
 					{/* add Week View container with props values from API parsed response (default CSS style positions it off screen right) */}
@@ -125,14 +125,24 @@ export default class Iphone_Container extends Component {
 			pmEndHours : localStorage.pmHoursEnd,
 			pmEndMins : localStorage.pmMinsEnd,
 		})
+
 	}
 
 	// Function: gets weather data from API, using user data
 	fetchWeatherData = (home, work) => {
 
-		// Insert API calls here...
+		var homeLocation = this.state.home;
+		var amStartHour = this.state.amStartHours;
 
-		// extract relevant data values from returned API data
+		var workLocation = this.state.work;
+		var pmStartHours = this.state.pmStartHours;
+
+		// var homeAPIcallURL = ??? need to build the url using 'homeLocation' variable 
+		// var workAPIcallURL = ??? need to build the url using 'workLocation' variable 
+
+		// Make API calls here...
+
+		// send response data with this call to extract relevant data values from returned API data
 		this.parseResponse({}); // doesn't pass in any retrieved data yet - data values are hard coded in the parseResponse function
 
 		// Currently the parseResponse function is creating both the AM and PM data in one execution.
@@ -200,7 +210,7 @@ export default class Iphone_Container extends Component {
 
 			// initialise values for AM weather details
 			amTemperature : 7,
-			amConditions : "mostlycloudy",
+			amConditions : "clear",
 
 				// set flags for accessory icons to be on or off. Need to add some logical rules to set these
 			amUmbrellaOn : false,
@@ -232,7 +242,7 @@ export default class Iphone_Container extends Component {
 
 			// initialise values for PM weather details
 			pmTemperature : 5,
-			pmConditions : 'rain',
+			pmConditions : 'partlycloudy',
 
 				// set flags for accessory icons to be on or off. Need to add some logical rules to set these
 			pmUmbrellaOn : true,
