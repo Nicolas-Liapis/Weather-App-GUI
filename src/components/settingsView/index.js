@@ -17,11 +17,11 @@ export default class SettingsView extends Component {
 
 				{/* Add Home Address - Form text field input and label to top of container */}
 				<div class={ style.homeAddressLabel }>Home Address</div>
-				<input class={style.homeField } type="text" name="home" placeholder={props.home} />
+				<input id="inputHome" class={style.homeField } type="text" name="home" placeholder={props.home} />
 
 				{/* Add Work Address - Form text field input and label to top of container */}
 				<div class={ style.workAddressLabel }>Work Address</div>
-				<input class={style.workField } type="text" name="work" placeholder={props.work}/>
+				<input id="inputWork" class={style.workField } type="text" name="work" placeholder={props.work}/>
 					
 				{/* Add divider line for formatting */}
 				<div class={ style.dividerLine1 }></div>
@@ -93,6 +93,10 @@ export default class SettingsView extends Component {
 
 		// If using a memory cache to store user data (instead of hard-coded values) we can use this form to update the user data cache - and therefore change the API reguest url.
 		// (to do this need to restructure the render function to enclose form inputs in actual 'form' tags)
+		let inputHome = document.getElementById('inputHome').value;
+		localStorage.inputFirst = inputHome;
+		let inputWork = document.getElementById('inputWork').value;
+		localStorage.inputSecond = inputWork;
 	}
 	
 }
