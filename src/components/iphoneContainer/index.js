@@ -21,6 +21,8 @@ export default class Iphone_Container extends Component {
 	constructor(props){
 		super(props);
 
+		this.state.loadingScreenClassName = style.loadingScreenOn;
+
 		// initialise default nav bar title
 		this.state.navBarTitle = "Weather App";
 
@@ -36,6 +38,8 @@ export default class Iphone_Container extends Component {
 		this.state.arrowLeftClassName = style.arrowLeftOff;
 		this.state.buttonRightClassName = style.buttonRightOn;
 		this.state.arrowRightClassName = style.arrowRightOn;
+		this.state.amTomorrowLabel = false;
+		this.state.pmTomorrowLabel = false;
 	}
 
 	// fetch data once component is mounted
@@ -60,12 +64,12 @@ export default class Iphone_Container extends Component {
 
 					{/* add Day View container with props values from API parsed response */}
 				<div className={this.state.dayViewClassName}>
-					< DayView day={this.state.today} date={this.state.date} amLocation={this.state.home} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmLocation={this.state.work} pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOn} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
+					< DayView day={this.state.today} date={this.state.date} amTomorrowLabel={this.state.amTomorrowLabel} pmTomorrowLabel={this.state.pmTomorrowLabel} amLocation={this.state.home} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmLocation={this.state.work} pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOn} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
 				</div>
 
 					{/* add Week View container with props values from API parsed response (default CSS style positions it off screen right) */}
 				<div className={this.state.weekViewClassName}>
-					< WeekView date={this.state.date} today={this.state.today} todayAM={this.state.amConditions} todayPM={this.state.pmConditions} day2={this.state.day2} day2AM={this.state.day2AM} day2PM={this.state.day2PM} day3={this.state.day3} day3AM={this.state.day3AM} day3PM={this.state.day3PM} day4={this.state.day4} day4AM={this.state.day4AM} day4PM={this.state.day4PM} day5={this.state.day5} day5AM={this.state.day5AM} day5PM={this.state.day5PM} day6={this.state.day6} day6AM={this.state.day6AM} day6PM={this.state.day6PM} day7={this.state.day7} day7AM={this.state.day7AM} day7PM={this.state.day7PM} />
+					< WeekView date={this.state.date} day1={this.state.day1} day1AM={this.state.day1AM} day1PM={this.state.day1PM} day2={this.state.day2} day2AM={this.state.day2AM} day2PM={this.state.day2PM} day3={this.state.day3} day3AM={this.state.day3AM} day3PM={this.state.day3PM} day4={this.state.day4} day4AM={this.state.day4AM} day4PM={this.state.day4PM} day5={this.state.day5} day5AM={this.state.day5AM} day5PM={this.state.day5PM} day6={this.state.day6} day6AM={this.state.day6AM} day6PM={this.state.day6PM} day7={this.state.day7} day7AM={this.state.day7AM} day7PM={this.state.day7PM} />
 				</div>
 
 					{/* add navigation indicator symbols at bottom of screen - to signify more content to left/right of screen */}
@@ -103,6 +107,10 @@ export default class Iphone_Container extends Component {
 				<div class={style.maskLeft}></div>
 				<div class={style.maskRight}></div>
 				<div class={style.maskBottom}></div>
+
+				<div class={this.state.loadingScreenClassName}>
+					<div class={style.loadingLabel}>Loading...</div>
+				</div>
 			</div>
 		);
 	}
@@ -132,171 +140,257 @@ export default class Iphone_Container extends Component {
 	fetchWeatherData = (home, work) => {
 
 		var homeLocation = this.state.home;
-		var amStartHour = this.state.amStartHours;
-
 		var workLocation = this.state.work;
-		var pmStartHours = this.state.pmStartHours;
-
-		// var homeAPIcallURL = ??? need to build the url using 'homeLocation' variable 
-		// var workAPIcallURL = ??? need to build the url using 'workLocation' variable 
-
+		console.log(homeLocation);
+		console.log(workLocation);
 		// Make API calls here...
 
-		// send response data with this call to extract relevant data values from returned API data
-		this.parseResponse({}); // doesn't pass in any retrieved data yet - data values are hard coded in the parseResponse function
+		var url = "http://api.wunderground.com/api/5d95b7c03397aca9/hourly10day/q/UK/"+homeLocation+".json";
+		$.ajax({
+			url: url,
+			dataType: "jsonp",
+			success : this.parseAMResponse,
+			error : function(req, err){ console.log('API call failed ' + err); }
+		})
 
-		// Currently the parseResponse function is creating both the AM and PM data in one execution.
-		// if possible need to set up 2 API calls (one for home/work) and parse both responses.
-
+		var url = "http://api.wunderground.com/api/5d95b7c03397aca9/hourly10day/q/UK/"+workLocation+".json";
+		$.ajax({
+			url: url,
+			dataType: "jsonp",
+			success : this.parsePMResponse,
+			error : function(req, err){ console.log('API call failed ' + err); }
+		})
 	}
 
-	// Function: parses API response data and extracts relevant data
-	parseResponse = (parsed_json) => {
-		// var day = parsed_json['current_observation']['temp_c'];
-		// var date = parsed_json['current_observation']['temp_c'];
-
-		// var amTemperature = parsed_json['current_observation']['temp_c'];
-		// var amConditions = parsed_json['current_observation']['weather'];
-
-		// var amTime1 = parsed_json['current_observation']['weather'];
-		// var amPop1 = parsed_json[]
-		// var amWind1 = parsed_json[]
-		// var amTemp1 = parsed_json[]
-
-		// var amTime2 = parsed_json[]
-		// var amPop2 = parsed_json[]
-		// var amWind2 = parsed_json[]
-		// var amTemp2 = parsed_json[]
-
-		// var amTime3 = parsed_json[]
-		// var amPop3 = parsed_json[]
-		// var amWind3 = parsed_json[]
-		// var amTemp3 = parsed_json[]
-
-		// var amTime2 = parsed_json[]
-		// var amPop2 = parsed_json[]
-		// var amWind2 = parsed_json[]
-		// var amTemp2 = parsed_json[]
-
-		// var pmTemperature = parsed_json[]
-		// var pmConditions = parsed_json[]
-
-		// var pmPop1 = parsed_json[]
-		// var pmWind1 = parsed_json[]
-		// var pmTemp1 = parsed_json[]
-
-		// var pmTime2 = parsed_json[]
-		// var pmPop2 = parsed_json[]
-		// var pmWind2 = parsed_json[]
-		// var pmTemp2 = parsed_json[]
-
-		// var pmTime3 = parsed_json[]
-		// var pmPop3 = parsed_json[]
-		// var pmWind3 = parsed_json[]
-		// var pmTemp3 = parsed_json[]
-
-		// var pmTime2 = parsed_json[]
-		// var pmPop2 = parsed_json[]
-		// var pmWind2 = parsed_json[]
-		// var pmTemp2 = parsed_json[]
-
-
-
-		// set states for fields so they could be rendered later on
-		this.setState({
-
-			today : "Wednesday",
-			date : "28 March 2018",
-
-			// initialise values for AM weather details
-			amTemperature : 7,
-			amConditions : "clear",
-
-				// set flags for accessory icons to be on or off. Need to add some logical rules to set these
-			amUmbrellaOn : false,
-			amCoatOn : true,
-			amSunglassesOn : true,
-
-				// am - hour 1 details
-			amTime1 : '8am',
-			amIcon1 : 'partlycloudy',
-			amPop1 : 0,
-			amWind1 : 5,
-			amTemp1 : 7,
-
-				// am - hour 2 details
-			amTime2 : '9am',
-			amIcon2 : 'partlycloudy',
-			amPop2 : 0,
-			amWind2 : 6,
-			amTemp2 : 8,
-
-				// am - hour 3 details
-			amTime3 : '10am',
-			amIcon3 : 'partlycloudy',
-			amPop3 : 10,
-			amWind3 : 6,
-			amTemp3 : 8,
-
-			// -------------------------
-
-			// initialise values for PM weather details
-			pmTemperature : 5,
-			pmConditions : 'partlycloudy',
-
-				// set flags for accessory icons to be on or off. Need to add some logical rules to set these
-			pmUmbrellaOn : true,
-			pmCoatOn : true,
-			pmSunglassesOn : false,
-
-				// pm - hour 1 details
-			pmTime1 : '5pm',
-			pmIcon1 : 'chancerain',
-			pmPop1 : 60,
-			pmWind1 : 3,
-			pmTemp1 : 9,
-
-				// pm - hour 2 details
-			pmTime2 : '6pm',
-			pmIcon2 : 'rain',
-			pmPop2 : 90,
-			pmWind2 : 4,
-			pmTemp2 : 7,
-
-				// pm - hour 3 details
-			pmTime3 : '7pm',
-			pmIcon3 : 'rain',
-			pmPop3 : 90,
-			pmWind3 : 4,
-			pmTemp3 : 6,
-
-
-			day2 : "Thursday",
-			day2AM : "mostlycloudy",
-			day2PM : "cloudy",
-
-			day3 : "Friday",
-			day3AM : "cloudy",
-			day3PM : "chancerain",
-
-			day4 : "Saturday",
-			day4AM : "rain",
-			day4PM : "rain",
-
-			day5 : "Sunday",
-			day5AM : "cloudy",
-			day5PM : "partlycloudy",
-
-			day6 : "Monday",
-			day6AM : "rain",
-			day6PM : "clear",
-
-			day7 : "Tuesday",
-			day7AM : "clear",
-			day7PM : "clear",
-
-		});
+	parseAMResponse = (parsed_json) => {
+		 this.parseResponse(parsed_json, true)
 	}
+
+	parsePMResponse = (parsed_json) => {
+		this.parseResponse(parsed_json, false)
+	}	
+
+	parseResponse = (parsed_json, isAMData) => {
+
+		var startHour = (isAMData) ? parseInt(this.state.amStartHours) : parseInt(this.state.pmStartHours);
+
+		var allHours = parsed_json.hourly_forecast;
+
+		var firstHourObject = this.getFirstHourObject(allHours);
+		
+		var todayYearDay = parseInt(firstHourObject['FCTTIME'].yday);
+		var todayDate = parseInt(firstHourObject['FCTTIME'].mday);
+
+		if (startHour < parseInt(firstHourObject['FCTTIME'].hour)) {
+			if ((startHour + 2) >= parseInt(firstHourObject['FCTTIME'].hour)) {
+				startHour = parseInt(firstHourObject['FCTTIME'].hour);
+			} else {
+				todayYearDay += 1;
+				if (isAMData) {
+					this.setState({amTomorrowLabel : true})	
+				} else {
+					this.setState({pmTomorrowLabel : true})	
+				}
+			}
+		}
+
+		var hour1Forecast = this.getHourObject(allHours, startHour, todayYearDay);
+		var hour2Forecast = this.getHourObject(allHours, startHour + 1, todayYearDay);
+		var hour3Forecast = this.getHourObject(allHours, startHour + 2, todayYearDay);
+
+		var severeTemperature = this.getSevereTemperature(hour1Forecast, hour2Forecast, hour3Forecast);
+		var severeConditions = this.getSevereConditions(hour1Forecast, hour2Forecast, hour3Forecast);
+
+		var umbrellaOn = this.testUmbrella(severeConditions);
+		var coatOn = this.testCoat(severeTemperature);
+		var sunglassesOn = this.testSunglasses(hour1Forecast, hour2Forecast, hour3Forecast);
+
+		todayYearDay = parseInt(firstHourObject['FCTTIME'].yday); // reset current year-day
+
+		var day1StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 1);
+		var day2StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 2);
+		var day3StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 3);
+		var day4StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 4);
+		var day5StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 5);
+		var day6StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 6);
+		var day7StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 7);
+
+		if (isAMData) {
+			this.setState({
+				today : firstHourObject['FCTTIME'].weekday_name,
+				date : (todayDate + " " + firstHourObject['FCTTIME'].month_name + " " + firstHourObject['FCTTIME'].year),
+
+				amTemperature : severeTemperature,
+				amConditions : severeConditions,
+
+				amUmbrellaOn : umbrellaOn,
+				amCoatOn : coatOn,
+				amSunglassesOn : sunglassesOn,
+
+				amTime1 : this.getHourString(hour1Forecast['FCTTIME'].hour),
+				amIcon1 : hour1Forecast.icon,
+				amPop1 : hour1Forecast.pop,
+				amWind1 : hour1Forecast.wspd['english'],
+				amTemp1 : hour1Forecast.temp['metric'],
+
+				amTime2 : this.getHourString(hour2Forecast['FCTTIME'].hour),
+				amIcon2 : hour2Forecast.icon,
+				amPop2 : hour2Forecast.pop,
+				amWind2 : hour2Forecast.wspd['english'],
+				amTemp2 : hour2Forecast.temp['metric'],
+
+				amTime3 : this.getHourString(hour3Forecast['FCTTIME'].hour),
+				amIcon3 : hour3Forecast.icon,
+				amPop3 : hour3Forecast.pop,
+				amWind3 : hour3Forecast.wspd['english'],
+				amTemp3 : hour2Forecast.temp['metric'],
+
+				day1 : day1StartHourForecast['FCTTIME'].weekday_name,
+				day1AM : day1StartHourForecast.icon,
+
+				day2 : day2StartHourForecast['FCTTIME'].weekday_name,
+				day2AM : day2StartHourForecast.icon,
+
+				day3 : day3StartHourForecast['FCTTIME'].weekday_name,
+				day3AM : day3StartHourForecast.icon,
+
+				day4 : day4StartHourForecast['FCTTIME'].weekday_name,
+				day4AM : day4StartHourForecast.icon,
+
+				day5 : day5StartHourForecast['FCTTIME'].weekday_name,
+				day5AM : day5StartHourForecast.icon,
+
+				day6 : day6StartHourForecast['FCTTIME'].weekday_name,
+				day6AM : day6StartHourForecast.icon,
+
+				day7 : day7StartHourForecast['FCTTIME'].weekday_name,
+				day7AM : day7StartHourForecast.icon,
+			})
+		} else {
+			this.setState({
+
+				pmTemperature : severeTemperature,
+				pmConditions : severeConditions,
+
+				pmUmbrellaOn : umbrellaOn,
+				pmCoatOn : coatOn,
+				pmSunglassesOn : sunglassesOn,
+
+				pmTime1 : this.getHourString(hour1Forecast['FCTTIME'].hour),
+				pmIcon1 : hour1Forecast.icon,
+				pmPop1 : hour1Forecast.pop,
+				pmWind1 : hour1Forecast.wspd['english'],
+				pmTemp1 : hour1Forecast.temp['metric'],
+
+				pmTime2 : this.getHourString(hour2Forecast['FCTTIME'].hour),
+				pmIcon2 : hour2Forecast.icon,
+				pmPop2 : hour2Forecast.pop,
+				pmWind2 : hour2Forecast.wspd['english'],
+				pmTemp2 : hour2Forecast.temp['metric'],
+
+				pmTime3 : this.getHourString(hour3Forecast['FCTTIME'].hour),
+				pmIcon3 : hour3Forecast.icon,
+				pmPop3 : hour3Forecast.pop,
+				pmWind3 : hour3Forecast.wspd['english'],
+				pmTemp3 : hour2Forecast.temp['metric'],
+
+				day2PM : day2StartHourForecast.icon,
+				day3PM : day3StartHourForecast.icon,
+				day4PM : day4StartHourForecast.icon,
+				day5PM : day5StartHourForecast.icon,
+				day6PM : day6StartHourForecast.icon,
+				day7PM : day7StartHourForecast.icon,
+
+				loadingScreenClassName : style.loadingScreenOff
+
+			})
+		}
+	}
+
+	getFirstHourObject = (allHours) => {
+		for (var hour in allHours) {
+			if (allHours.hasOwnProperty(hour)) {
+				var hourObject = allHours[hour];
+				if (hour == 0) {
+					return hourObject;
+				}
+			}
+		}
+	}
+
+	getHourObject = (allHours, hourNumber, dayNumber) => {
+		// var currentHour = {}; 
+
+		for (var hour in allHours) {
+			if (allHours.hasOwnProperty(hour)) {
+				var hourObject = allHours[hour];
+				// if (hour == 0) {
+					// currentHour = hourObject;
+				// } else
+				 if (hourObject.FCTTIME["hour"] == hourNumber && hourObject.FCTTIME["yday"] == dayNumber) {
+					return hourObject;
+				} 
+			}
+		}
+		// return currentHour;
+	}
+
+	getHourString = (hour) => {
+		return (parseInt(hour) < 12) ? hour + "am" : (hour - 12) + "pm";
+	}
+
+	// ----- Data Analysis funtions -----
+
+	getSevereTemperature = (hour1, hour2, hour3) => {
+
+		var hour1Temp = parseInt(hour1.temp['metric']);
+		var hour2Temp = parseInt(hour2.temp['metric']);
+		var hour3Temp = parseInt(hour3.temp['metric']);
+
+		var severestTemperature = hour1Temp;
+
+		// Add logic to determine most severe temperature here...
+
+		return severestTemperature;
+	}
+
+	getSevereConditions = (hour1, hour2, hour3) => {
+		var hour1Conditions = hour1.icon;
+		var hour2Conditions = hour2.temp;
+		var hour3Conditions = hour3.temp;
+
+		var severestConditions = hour1Conditions;
+
+		// Add logic to determine most severe conditions here...
+
+		return severestConditions;
+	}
+
+	testUmbrella = (conditions) => {
+		var shouldTakeUmbrella = false;
+
+		// Add logic to decide whether to take an umbrella...
+
+		return shouldTakeUmbrella;
+	}
+
+	testCoat = (temperature) => {
+		var shouldTakeCoat = false;
+
+		// Add logic to decide whether to take a coat...
+
+		return shouldTakeCoat;
+	}
+
+	testSunglasses = (hour1, hour2, hour3) => {
+		var shouldTakeSunglasses = false;
+
+		// Add logic to decide whether to take sunglasses...
+
+		return shouldTakeSunglasses;
+	}
+
+
 
 	// ----- Navigation functions -----
 

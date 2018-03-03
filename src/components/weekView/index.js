@@ -13,8 +13,8 @@ export default class WeekView extends Component {
 		
 		// define style classnames for dynamic weather condition icons
 		// (could do these operations in-line, but it's easier to see and understand the process if removed from the render function in this block)
-		var day1AMIcon = this.getIconStyle("am", props.todayAM);
-		var day1PMIcon = this.getIconStyle("pm", props.todayPM);
+		var day1AMIcon = this.getIconStyle("am", props.day1AM);
+		var day1PMIcon = this.getIconStyle("pm", props.day2AM);
 		var day2AMIcon = this.getIconStyle("am", props.day2AM);
 		var day2PMIcon = this.getIconStyle("pm", props.day2PM);
 		var day3AMIcon = this.getIconStyle("am", props.day3AM);
@@ -37,7 +37,7 @@ export default class WeekView extends Component {
 				<div class={ style.weekCurrentDate }>{props.date}</div>
 					
 				{/* Add name and AM/PM commute conditions for day 1 (today) - using values from props */}
-				<div class={ style.day1Title } > {props.today} 
+				<div class={ style.day1Title } > {props.day1} 
 					<div class={ style.amConditions } >
 						<div class={day1AMIcon}></div>
 					</div>

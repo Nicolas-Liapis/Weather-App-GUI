@@ -13,13 +13,13 @@ export default class App extends Component {
 		if (localStorage.getItem("inputHome") === null) {
 			localStorage.inputHome = "London";
 			localStorage.inputWork = "London";
-			localStorage.amHoursStart = 0;
+			localStorage.amHoursStart = 8;
 			localStorage.amMinsStart = 0;
-			localStorage.amHoursEnd = 0;
+			localStorage.amHoursEnd = 9;
 			localStorage.amMinsEnd = 0;
-			localStorage.pmHoursStart = 0;
+			localStorage.pmHoursStart = 17;
 			localStorage.pmMinsStart = 0;
-			localStorage.pmHoursEnd = 0;
+			localStorage.pmHoursEnd = 18;
 			localStorage.pmMinsEnd = 0;
 		}
 	}

@@ -15,14 +15,14 @@ export default class SettingsView extends Component {
 		// modify saved form values to show correct 24-hour clock representation ('04' instead of '4' etc) - form inputs parsed to Int when saving to storage in 'acceptChanges' function.
 		var homeValue = props.home;
 		var workValue = props.work;
-		var amStartHoursValue = (props.amStartHours > 10) ? props.amStartHours : '0' + props.amStartHours ;
-		var amStartMinsValue = (props.amStartMins > 10) ? props.amStartMins : '0' + props.amStartMins;
-		var amEndHoursValue = (props.amEndHours > 10) ? props.amEndHours : '0' + props.amEndHours;
-		var amEndMinsValue = (props.amEndMins > 10) ? props.amEndMins : '0' + props.amEndMins;
-		var pmStartHoursValue = (props.pmStartHours > 10) ? props.pmStartHours : '0' + props.pmStartHours;
-		var pmStartMinsValue = (props.pmStartMins > 10) ? props.pmStartMins : '0' + props.pmStartMins;
-		var pmEndHoursValue = (props.pmEndHours > 10) ? props.pmEndHours : '0' + props.pmEndHours;
-		var pmEndMinsValue = (props.pmEndMins > 10) ? props.pmEndMins : '0' + props.pmEndMins;
+		var amStartHoursValue = (props.amStartHours > 9) ? props.amStartHours : '0' + props.amStartHours ;
+		var amStartMinsValue = (props.amStartMins > 9) ? props.amStartMins : '0' + props.amStartMins;
+		var amEndHoursValue = (props.amEndHours > 9) ? props.amEndHours : '0' + props.amEndHours;
+		var amEndMinsValue = (props.amEndMins > 9) ? props.amEndMins : '0' + props.amEndMins;
+		var pmStartHoursValue = (props.pmStartHours > 9) ? props.pmStartHours : '0' + props.pmStartHours;
+		var pmStartMinsValue = (props.pmStartMins > 9) ? props.pmStartMins : '0' + props.pmStartMins;
+		var pmEndHoursValue = (props.pmEndHours > 9) ? props.pmEndHours : '0' + props.pmEndHours;
+		var pmEndMinsValue = (props.pmEndMins > 9) ? props.pmEndMins : '0' + props.pmEndMins;
 
 		return (
 			<div class={style.settingsView}> {/* Add container */}
@@ -46,9 +46,9 @@ export default class SettingsView extends Component {
 					<div class={ style.startTime }>
 						<div class={ style.startTitle }>Starts</div>
 						<div class={ style.timeSelector }>
-							<input id="amHoursStart" class={ style.hours } dir="rtl" type="number" name="amStartHours" value={amStartHoursValue} min="0" max="11" />
+							<input id="amHoursStart" class={ style.hours } dir="rtl" type="number" name="amStartHours" value={amStartHoursValue} min="0" max="23" />
 							:
-							<input id="amMinsStart" class={ style.minutes } type="number" name="amStartMinutes" value={pmStartMinsValue} step="10" min="0" max="50" />
+							<input id="amMinsStart" class={ style.minutes } type="number" name="amStartMinutes" value={amStartMinsValue} step="15" min="0" max="45" />
 						</div>
 					</div>
 
@@ -56,9 +56,9 @@ export default class SettingsView extends Component {
 					<div class={ style.endTime }>
 						<div class={ style.endTitle }>Ends</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="amHoursEnd" class={ style.hours } dir="rtl" type="number" name="amEndHours" value={amEndHoursValue} min="0" max="12" />
+							<input id="amHoursEnd" class={ style.hours } dir="rtl" type="number" name="amEndHours" value={amEndHoursValue} min="0" max="23" />
 							:
-							<input id="amMinsEnd" class={ style.minutes } type="number" name="amEndMinutes" value={amEndMinsValue} step="10" min="0" max="50" />
+							<input id="amMinsEnd" class={ style.minutes } type="number" name="amEndMinutes" value={amEndMinsValue} step="15" min="0" max="45" />
 						</div>
 					</div>
 				</div>
@@ -71,9 +71,9 @@ export default class SettingsView extends Component {
 					<div class={ style.startTime }>
 						<div class={ style.startTitle }>Starts</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="pmHoursStart" class={ style.hours } dir="rtl" type="number" name="pmStartHours" value={pmStartHoursValue} min="0" max="11" />
+							<input id="pmHoursStart" class={ style.hours } dir="rtl" type="number" name="pmStartHours" value={pmStartHoursValue} min="0" max="23" />
 							:
-							<input id="pmMinsStart" class={ style.minutes } type="number" name="pmStartMinutes" value={pmStartMinsValue} step="10" min="0" max="50" />
+							<input id="pmMinsStart" class={ style.minutes } type="number" name="pmStartMinutes" value={pmStartMinsValue} step="15" min="0" max="45" />
 						</div>
 					</div>
 
@@ -81,9 +81,9 @@ export default class SettingsView extends Component {
 					<div class={ style.endTime }>
 						<div class={ style.endTitle }>Ends</div> {/* section title */}
 						<div class={ style.timeSelector }>
-							<input id="pmHoursEnd" class={ style.hours } dir="rtl" type="number" name="pmEndHours" value={pmEndHoursValue} min="0" max="12" />
+							<input id="pmHoursEnd" class={ style.hours } dir="rtl" type="number" name="pmEndHours" value={pmEndHoursValue} min="0" max="23" />
 							:
-							<input id="pmMinsEnd" class={ style.minutes } type="number" name="pmEndMinutes" value={pmEndMinsValue} step="10" min="0" max="50" />
+							<input id="pmMinsEnd" class={ style.minutes } type="number" name="pmEndMinutes" value={pmEndMinsValue} step="15" min="0" max="45" />
 						</div>
 					</div>
 				</div>
@@ -101,6 +101,8 @@ export default class SettingsView extends Component {
 
 	// Function: save changes for home / work destinations and commute times
 	acceptChanges = () => {
+
+		alert("Would be good to check validity of start/end times here and not accept changes if invalid");
 		
 		//Saves Home and Work destinations
 		let inputHome = document.getElementById('inputHome').value;

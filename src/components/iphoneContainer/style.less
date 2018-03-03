@@ -320,3 +320,37 @@
 	background-color: #FAFAFA;
 }
 
+/*----------------------------*/
+
+/*-------Loading screen-----------*/
+
+.loadingScreenOn {
+	position: absolute;
+	width: 375px;
+	height: 603px;
+	margin-top: 64px;
+	background-color: white; 
+	z-index: 15;
+	opacity: 1;
+
+}
+
+.loadingScreenOff {
+	position: absolute;
+	width: 375px;
+	height: 603px;
+	margin-top: 64px;
+	background-color: white; 
+	z-index: 15;
+	opacity: 0;
+	transition-property: opacity;
+    transition-duration: 1s;
+    z-index: 0;
+}
+
+.loadingLabel {
+	margin-top: 250px;
+	color: #80B0E0;
+	font-size: 15px;
+	font-weight: bold;
+}

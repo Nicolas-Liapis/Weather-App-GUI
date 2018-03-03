@@ -31,6 +31,8 @@ export default class DayView extends Component {
 		// initialise flags for current layout states
 		this.state.amShowing  = false;
 		this.state.pmShowing  = false;
+
+		// console.log(props.amTomorrowLabel)
 	}
 
 	// render Day View component
@@ -47,8 +49,12 @@ export default class DayView extends Component {
 		var amSummaryIcon = this.getIconStyle("large", "am", props.amConditions);
 		var pmSummaryIcon = this.getIconStyle("large", "pm", props.pmConditions);
 
-		var	amBackgroundImage = this.getBackgroundImage("am", props.amConditions) 
-		var	pmBackgroundImage = this.getBackgroundImage("pm", props.pmConditions)    
+		var	amBackgroundImage = this.getBackgroundImage("am", props.amConditions); 
+		var	pmBackgroundImage = this.getBackgroundImage("pm", props.pmConditions);  
+
+		var amTomorrowLabelClassName = (props.amTomorrowLabel) ? style.amTomorrowLabelOn : style.amTomorrowLabelOff;
+		var pmTomorrowLabelClassName = (props.pmTomorrowLabel) ? style.pmTomorrowLabelOn : style.pmTomorrowLabelOff;
+
 		
 		return (
 			<div class={style.dayView}> {/*  add view container */}
@@ -192,6 +198,9 @@ export default class DayView extends Component {
 						<div class={ this.state.amIndicatorArrowClassName }></div>
 					</div>
 
+					{/* Add label to indicate if summary is for tomorrow's commute */}
+					<div class={amTomorrowLabelClassName}>Tomorrow</div>
+
 					{/* add overlay with gradient to AM section - default opacity style set to zero */}
 					<div className={ this.state.amOverlayClassName }></div>
 
@@ -234,6 +243,9 @@ export default class DayView extends Component {
 
 					{/* add commute summary Temperature using data value from props */}
 					<div class={ style.pmTemperature }>{ props.pmTemperature + ' ˚c' }</div>
+
+					{/* Add label to indicate if summary is for tomorrow's commute */}
+					<div class={pmTomorrowLabelClassName}>Tomorrow</div>
 								
 					{/* add overlay with gradient to PM section - default opacity style set to zero */}
 					<div className={ this.state.pmOverlayClassName }></div>
@@ -358,12 +370,12 @@ export default class DayView extends Component {
 				break;
 
 			case "cloudy" :
-			case "mostlycloudy" :
 			case "fog" :
 			case "hazy" :
 				return (timePeriod == "am") ? style_backgrounds.amCloudy : style_backgrounds.pmCloudy ;
 				break;
 
+			case "mostlycloudy" :
 			case "partlycloudy" :
 			case "partlysunny" : 
 			case "unknown" :
