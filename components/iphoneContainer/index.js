@@ -472,7 +472,7 @@ export default class Iphone_Container extends Component {
 
 		var shouldTakeUmbrella;
 
-		if (hour1Rain > 10 || hour2Rain > 10 || hour3Rain > 10) {
+		if (hour1Rain > 20 || hour2Rain > 20 || hour3Rain > 20) {
 			shouldTakeUmbrella = true;
 		} else {
 			shouldTakeUmbrella = false;
