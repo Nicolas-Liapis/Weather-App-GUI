@@ -383,9 +383,87 @@ export default class Iphone_Container extends Component {
 		var severestConditions = hour1Conditions;
 
 		// Add logic to determine most severe conditions here...
+		//severest condition hierachy
+			//tstorms
+				if (hour1Conditions == "tstorms") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "tstorms") {severestConditions = hour2Conditions}
+				else if (hour2Conditions == "tstorms") {severestConditions = hour3Conditions}
+			//chancetstorms
+				else if (hour1Conditions == "chancetstorms") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancetstorms") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancetstorms") {severestConditions = hour3Conditions}
+			//snow
+				else if (hour1Conditions == "snow") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "snow") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "snow") {severestConditions = hour3Conditions}
+			//chancesnow
+				else if (hour1Conditions == "chancesnow") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancesnow") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancesnow") {severestConditions = hour3Conditions}
+			// sleet
+				else if (hour1Conditions == "sleet") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "sleet") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "sleet") {severestConditions = hour3Conditions}
+			//chancesleet
+				else if (hour1Conditions == "chancesleet") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancesleet") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancesleet") {severestConditions = hour3Conditions}
+			//rain
+				else if (hour1Conditions == "rain") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "rain") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "rain") {severestConditions = hour3Conditions}
+			//chancerain
+				else if (hour1Conditions == "chancerain") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancerain") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancerain") {severestConditions = hour3Conditions}
+			//flurries
+				else if (hour1Conditions == "flurries") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "flurries") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "flurries") {severestConditions = hour3Conditions}
+			//chanceflurries
+				else if (hour1Conditions == "chanceflurries") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chanceflurries") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chanceflurries") {severestConditions = hour3Conditions}
+			//unknown
+				else if (hour1Conditions == "unknown") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "unknown") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "unknown") {severestConditions = hour3Conditions}
+			//fog
+				else if (hour1Conditions == "fog") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "fog") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "fog") {severestConditions = hour3Conditions}
+			// cloudy
+				else if (hour1Conditions == "cloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "cloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "cloudy") {severestConditions = hour3Conditions}
+			// mostlycloudy
+				else if (hour1Conditions == "mostlycloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "mostlycloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "mostlycloudy") {severestConditions = hour3Conditions}
+			// partlycloudy
+				else if (hour1Conditions == "partlycloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "partlycloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "partlycloudy") {severestConditions = hour3Conditions}
+			// hazy
+				else if (hour1Conditions == "hazy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "hazy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "hazy") {severestConditions = hour3Conditions}
+			// clear
+				else if (hour1Conditions == "clear") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "clear") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "clear") {severestConditions = hour3Conditions}
+			// mostlysunny
+				else if (hour1Conditions == "mostlysunny") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "mostlysunny") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "mostlysunny") {severestConditions = hour3Conditions}
+			// sunny
+				else if (hour1Conditions == "sunny") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "sunny") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "sunny") {severestConditions = hour3Conditions}
 
 		return severestConditions;
 	}
+
 
 	testUmbrella = (hour1, hour2, hour3) => {
 		var hour1Rain = parseInt(hour1.pop);
