@@ -24,7 +24,7 @@ export default class Iphone_Container extends Component {
 		this.state.loadingScreenClassName = style.loadingScreenOn;
 
 		// initialise default nav bar title
-		this.state.navBarTitle = "Weather App";
+		this.state.navBarTitle = "ldnWthr";
 
 		// initialise default classnames for dynamic divs
 		this.state.dayViewClassName = style.dayViewCentre;
