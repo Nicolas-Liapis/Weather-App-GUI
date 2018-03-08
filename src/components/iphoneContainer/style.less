@@ -158,8 +158,8 @@
 	height: 603px;
 	margin-left: -15px;
 	margin-top: 64px;
-	z-index: 10;
-	background: linear-gradient(270deg,rgba(255,255,255,0), #FAFAFA);
+	z-index: 11;
+	background: linear-gradient(270deg,rgba(128,176,224,0), rgba(128,176,224,0.7));
 	opacity: 1;
 	transition-property: opacity;
     transition-duration: 1s;
@@ -172,11 +172,12 @@
 	height: 603px;
 	margin-left: -15px;
 	margin-top: 64px;
-	z-index: 10;
-	background: linear-gradient(270deg,rgba(255,255,255,0), #FAFAFA);
+	z-index: 11;
+	background: linear-gradient(270deg,rgba(128,176,224,0), rgba(128,176,224,0.7));
 	opacity: 0;
 	transition-property: opacity;
     transition-duration: 0.3s;
+    pointer-events:none;
 }
 
 
@@ -185,11 +186,11 @@
 	position: absolute;
 	margin-top: 362px;
 	margin-left: 4px;
-	width: 26px;
-	height: 42px;
-	background-image: url('../../assets/navElements/swipeArrow.png');
-	z-index: 9;
-	opacity: 1;
+	width: 25px;
+	height: 41px;
+	background-image: url('../../assets/navElements/swipeArrowLeft.png');
+	z-index: 12;
+	opacity: 0.9;
 	transition-property: opacity;
     transition-duration: 1s;
     animation-name: leftArrowAnimate;
@@ -197,6 +198,7 @@
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
+	pointer-events:none;
 }
 
 /* Safari 4.0 - 8.0 */
@@ -210,13 +212,14 @@
 	position: absolute;
 	margin-top: 362px;
 	margin-left: 4px;
-	width: 26px;
-	height: 42px;
-	background-image: url('../../assets/navElements/swipeArrow.png');
-	z-index: 9;
+	width: 25px;
+	height: 41px;
+	background-image: url('../../assets/navElements/swipeArrowLeft.png');
+	z-index: 12;
 	opacity: 0;
 	transition-property: opacity;
     transition-duration: 0.3s;
+    pointer-events:none;
 }
 
 .buttonRightOn {
@@ -226,9 +229,8 @@
 	height: 603px;;
 	margin-left: 340px;
 	margin-top: 64px;
-	z-index: 10;
-	background: linear-gradient(90deg,rgba(255,255,255,0), #FAFAFA);
-	/*background-color: #FAFAFA;*/
+	z-index: 11;
+	background: linear-gradient(90deg,rgba(128,176,224,0), rgba(128,176,224,1));
 	opacity: 1;
 	transition-property: opacity;
     transition-duration: 1s;
@@ -241,23 +243,23 @@
 	height: 603px;
 	margin-left: 340px;
 	margin-top: 64px;
-	z-index: 10;
-	background: linear-gradient(90deg,rgba(255,255,255,0), #FAFAFA);
+	z-index: 11;
+	background: linear-gradient(90deg,rgba(128,176,224,0), rgba(128,176,224,1));
 	opacity: 0;
 	transition-property: opacity;
     transition-duration: 0.3s;
+    pointer-events:none;
 }
 
 .arrowRightOn {
 	position: absolute;
 	margin-top: 362px;
 	margin-Left: 344px;
-	width: 26px;
-	height: 42px;
-	background-image: url('../../assets/navElements/swipeArrow.png');
-	z-index: 9;
-	transform: rotate(180deg);
-	opacity: 1;
+	width: 25px;
+	height: 41px;
+	background-image: url('../../assets/navElements/swipeArrowRight.png');
+	z-index: 12;
+	opacity: 0.9;
 	transition-property: opacity;
     transition-duration: 1s;
     animation-name: rightArrowAnimate;
@@ -265,6 +267,7 @@
     animation-duration: 0.5s;
     animation-iteration-count: infinite;
 	animation-timing-function: ease-in-out;
+	pointer-events:none;
 }
 
 /* Safari 4.0 - 8.0 */
@@ -278,14 +281,14 @@
 	position: absolute;
 	margin-top: 362px;
 	margin-Left: 344px;
-	width: 26px;
-	height: 42px;
-	background-image: url('../../assets/navElements/swipeArrow.png');
-	z-index: 9;
-	transform: rotate(180deg);
+	width: 25px;
+	height: 41px;
+	background-image: url('../../assets/navElements/swipeArrowRight.png');
+	z-index: 12;
 	opacity: 0;
 	transition-property: opacity;
     transition-duration: 0.3s;
+    pointer-events:none;
 }
 
 /*----------------------------*/

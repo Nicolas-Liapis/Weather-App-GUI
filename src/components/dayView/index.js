@@ -38,16 +38,24 @@ export default class DayView extends Component {
 	// render Day View component
 	render(props, state) { 
 
-		// define style classnames for dynamic weather condition icons
-		var amHour1Icon = this.getIconStyle("small", "am", props.amIcon1);
-		var amHour2Icon = this.getIconStyle("small", "am", props.amIcon2);
-		var amHour3Icon = this.getIconStyle("small", "am", props.amIcon3);
-		var pmHour1Icon = this.getIconStyle("small", "pm", props.pmIcon1);
-		var pmHour2Icon = this.getIconStyle("small", "pm", props.pmIcon2);
-		var pmHour3Icon = this.getIconStyle("small", "pm", props.pmIcon3);
+		// get correct String 12-hour clock values 
+		var amHour1String = this.getHourString(props.amTime1)
+		var amHour2String = this.getHourString(props.amTime2)
+		var amHour3String = this.getHourString(props.amTime3)
+		var pmHour1String = this.getHourString(props.pmTime1)
+		var pmHour2String = this.getHourString(props.pmTime2)
+		var pmHour3String = this.getHourString(props.pmTime3)
 
-		var amSummaryIcon = this.getIconStyle("large", "am", props.amConditions);
-		var pmSummaryIcon = this.getIconStyle("large", "pm", props.pmConditions);
+		// define style classnames for dynamic weather condition icons
+		var amHour1Icon = this.getIconStyle("small", props.amTime1, props.amIcon1);
+		var amHour2Icon = this.getIconStyle("small", props.amTime2, props.amIcon2);
+		var amHour3Icon = this.getIconStyle("small", props.amTime3, props.amIcon3);
+		var pmHour1Icon = this.getIconStyle("small", props.pmTime1, props.pmIcon1);
+		var pmHour2Icon = this.getIconStyle("small", props.pmTime2, props.pmIcon2);
+		var pmHour3Icon = this.getIconStyle("small", props.pmTime3, props.pmIcon3);
+
+		var amSummaryIcon = this.getIconStyle("large", 10, props.amConditions);
+		var pmSummaryIcon = this.getIconStyle("large", 18, props.pmConditions);
 
 		var	amBackgroundImage = this.getBackgroundImage("am", props.amConditions); 
 		var	pmBackgroundImage = this.getBackgroundImage("pm", props.pmConditions);  
@@ -61,8 +69,9 @@ export default class DayView extends Component {
 
 				{/* add day/date elements to top of container - using values from props */}
 				<div class={ style.currentDate }> 
-					<div className={ this.state.headerDayClassName }>{props.day}</div>
-					<div class={ this.state.headerDateClassName }>{props.date}</div>
+					<div className={ this.state.headerDayClassName }>{props.day}
+						<div class={ this.state.headerDateClassName }>{props.date}</div>
+					</div>
 				</div>
 
 				{/* add 3-hour data breakdown for pm commute - using data values from props */}
@@ -70,12 +79,13 @@ export default class DayView extends Component {
 
 					{/* add data for pm hour 1 */}
 					<div class={ style.cell1 }>
-						<div class={ style.cellTime}>{props.pmTime1}</div>
+						<div class={ style.cellTime}>{pmHour1String}</div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ pmHour1Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon}></div>
-						<div class={ style.cellPrecipitation }>{props.pmPop1 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon}>
+							<div class={ style.cellPrecipitation }>{props.pmPop1 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.pmWind1}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -87,12 +97,13 @@ export default class DayView extends Component {
 
 					{/* add data for pm hour 2 */}
 					<div class={ style.cell2 }>
-						<div class={ style.cellTime}>{props.pmTime2}</div>
+						<div class={ style.cellTime}>{pmHour2String}</div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ pmHour2Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon }></div>
-						<div class={ style.cellPrecipitation}>{props.pmPop2 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon }>
+							<div class={ style.cellPrecipitation}>{props.pmPop2 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.pmWind2}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -104,12 +115,13 @@ export default class DayView extends Component {
 
 					{/* add data for pm hour 3 */}
 					<div class={ style.cell3 }>
-						<div class={ style.cellTime}>{props.pmTime3}</div>
+						<div class={ style.cellTime}>{pmHour3String}</div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ pmHour3Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon }></div>
-						<div class={ style.cellPrecipitation}>{props.pmPop3 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon }>
+							<div class={ style.cellPrecipitation}>{props.pmPop3 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.pmWind3}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -123,12 +135,13 @@ export default class DayView extends Component {
 
 					{/* add data for am hour 3 */}
 					<div class={ style.cell1 }>
-						<div class={ style.cellTime}> {props.amTime1} </div>
+						<div class={ style.cellTime}> {amHour1String} </div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ amHour1Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon }></div>
-						<div class={ style.cellPrecipitation}>{props.amPop1 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon }>
+							<div class={ style.cellPrecipitation}>{props.amPop1 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.amWind1}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -140,12 +153,13 @@ export default class DayView extends Component {
 					
 					{/* add data for am hour 3 */}
 					<div class={ style.cell2 }>
-						<div class={ style.cellTime}> {props.amTime2} </div>
+						<div class={ style.cellTime}> {amHour2String} </div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ amHour2Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon }></div>
-						<div class={ style.cellPrecipitation}>{props.amPop2 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon }>
+							<div class={ style.cellPrecipitation}>{props.amPop2 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.amWind2}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -157,12 +171,13 @@ export default class DayView extends Component {
 					
 					{/* add data for am hour 3 */}
 					<div class={ style.cell3 }>
-						<div class={ style.cellTime}> {props.amTime3} </div>
+						<div class={ style.cellTime}> {amHour3String} </div>
 						<div class={style_iconsSmall.iconContainer}>
 							<div class={ amHour3Icon }></div>
 						</div>
-						<div class={ style.cellPrecipitationIcon }></div>
-						<div class={ style.cellPrecipitation}>{props.amPop3 + '%'}</div>
+						<div class={ style.cellPrecipitationIcon }>
+							<div class={ style.cellPrecipitation}>{props.amPop3 + '%'}</div>
+						</div>
 						<div class={ style.cellWindIcon}></div>
 						<div class={ style.cellWind}>{props.amWind3}</div>
 						<div class={ style.cellTemperatureIcon}></div>
@@ -299,17 +314,32 @@ export default class DayView extends Component {
 		}
 	}
 
+	// get correct String 12-hour clock values 
+	getHourString = (hour) => {
+
+		var hourString;
+		if (parseInt(hour) < 12) {
+			hourString = hour + "am";
+		} else if (parseInt(hour) == 12) {
+			hourString = hour + "pm";
+		} else {
+			hourString = (hour-12) + "pm";
+		}
+		
+		return hourString; 
+	}
+
 		// Function: determine the appropriate CSS style (background-image) for the weather conditions obtained from the API
-	getIconStyle = (size, timePeriod, conditions) => {
+	getIconStyle = (size, hour, conditions) => {
 		switch (conditions) {
 
 			case "sunny" :
 			case "clear" :
 			case "mostlysunny" :
 				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.clear : style_iconsSmall.nt_clear ;
+					return (hour > 5 && hour < 18) ? style_iconsSmall.clear : style_iconsSmall.nt_clear ;
 				} else {
-					return (timePeriod == "am") ? style_iconsLarge.clear : style_iconsLarge.nt_clear ;
+					return (hour > 5 && hour < 18) ? style_iconsLarge.clear : style_iconsLarge.nt_clear ;
 				}
 				break;
 
@@ -318,9 +348,9 @@ export default class DayView extends Component {
 			case "partlysunny" : 
 			case "unknown" :
 				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.partlyCloudy : style_iconsSmall.nt_partlyCloudy;
+					return (hour > 5 && hour < 18) ? style_iconsSmall.partlyCloudy : style_iconsSmall.nt_partlyCloudy;
 				} else {
-					return (timePeriod == "am") ? style_iconsLarge.partlyCloudy : style_iconsLarge.nt_partlyCloudy;
+					return (hour > 5 && hour < 18) ? style_iconsLarge.partlyCloudy : style_iconsLarge.nt_partlyCloudy;
 				}
 				break;
 
@@ -328,9 +358,9 @@ export default class DayView extends Component {
 			case "fog" :
 			case "hazy" :
 				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.cloudy : style_iconsSmall.nt_cloudy;
+					return (hour > 5 && hour < 18) ? style_iconsSmall.cloudy : style_iconsSmall.nt_cloudy;
 				} else {
-					return (timePeriod == "am") ? style_iconsLarge.cloudy : style_iconsLarge.nt_cloudy;
+					return (hour > 5 && hour < 18) ? style_iconsLarge.cloudy : style_iconsLarge.nt_cloudy;
 				}
 				break;
 
@@ -339,9 +369,9 @@ export default class DayView extends Component {
 			case "chanceflurries" :
 			case "chancetstorms" : 
 				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.chanceRain : style_iconsSmall.nt_chanceRain;	
+					return (hour > 5 && hour < 18) ? style_iconsSmall.chanceRain : style_iconsSmall.nt_chanceRain;	
 				} else {
-					return (timePeriod == "am") ? style_iconsLarge.chanceRain : style_iconsLarge.nt_chanceRain;
+					return (hour > 5 && hour < 18) ? style_iconsLarge.chanceRain : style_iconsLarge.nt_chanceRain;
 				}
 				break;
 
@@ -352,9 +382,9 @@ export default class DayView extends Component {
 			case "flurries" : 
 			case "snow" : 
 				if (size == "small") {
-					return (timePeriod == "am") ? style_iconsSmall.rain : style_iconsSmall.nt_rain;	
+					return (hour > 5 && hour < 18) ? style_iconsSmall.rain : style_iconsSmall.nt_rain;	
 				} else {
-					return (timePeriod == "am") ? style_iconsLarge.rain : style_iconsLarge.nt_rain;	
+					return (hour > 5 && hour < 18) ? style_iconsLarge.rain : style_iconsLarge.nt_rain;	
 				}
 				break;
 		}

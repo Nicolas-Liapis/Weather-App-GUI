@@ -23,7 +23,7 @@ export default class Clock extends Component {
 
     render(props, state) {
         let time = new Date(state.time).toLocaleTimeString(navigator.language, {hour: '2-digit', minute:'2-digit'});
-        return <span >{ time }</span>;
+        return <span style="font-size: 14px;">{ time }</span>;
     }
 }
 

@@ -24,7 +24,7 @@ export default class Iphone_Container extends Component {
 		this.state.loadingScreenClassName = style.loadingScreenOn;
 
 		// initialise default nav bar title
-		this.state.navBarTitle = "Weather App";
+		this.state.navBarTitle = "LdnWthr";
 
 		// initialise default classnames for dynamic divs
 		this.state.dayViewClassName = style.dayViewCentre;
@@ -64,7 +64,7 @@ export default class Iphone_Container extends Component {
 
 					{/* add Day View container with props values from API parsed response */}
 				<div className={this.state.dayViewClassName}>
-					< DayView day={this.state.today} date={this.state.date} amTomorrowLabel={this.state.amTomorrowLabel} pmTomorrowLabel={this.state.pmTomorrowLabel} amLocation={this.state.home} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmLocation={this.state.work} pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOn} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
+					< DayView day={this.state.today} date={this.state.date} amTomorrowLabel={this.state.amTomorrowLabel} pmTomorrowLabel={this.state.pmTomorrowLabel} amLocation={this.state.home} amTemperature={this.state.amTemperature} amConditions={this.state.amConditions} amUmbrellaOn={this.state.amUmbrellaOn} amCoatOn={this.state.amCoatOn} amSunglassesOn={this.state.amSunglassesOn} amTime1={this.state.amTime1} amIcon1={this.state.amIcon1} amPop1={this.state.amPop1} amWind1={this.state.amWind1} amTemp1={this.state.amTemp1} amTime2={this.state.amTime2} amIcon2={this.state.amIcon2} amPop2={this.state.amPop2} amWind2={this.state.amWind2} amTemp2={this.state.amTemp2} amTime3={this.state.amTime3} amIcon3={this.state.amIcon3} amPop3={this.state.amPop3} amWind3={this.state.amWind3} amTemp3={this.state.amTemp3}  pmLocation={this.state.work} pmTemperature={this.state.pmTemperature} pmConditions={this.state.pmConditions} pmUmbrellaOn={this.state.pmUmbrellaOn} pmCoatOn={this.state.pmCoatOn} pmSunglassesOn={this.state.pmSunglassesOff} pmTime1={this.state.pmTime1} pmIcon1={this.state.pmIcon1} pmPop1={this.state.pmPop1} pmWind1={this.state.pmWind1} pmTemp1={this.state.pmTemp1} pmTime2={this.state.pmTime2} pmIcon2={this.state.pmIcon2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} pmTime3={this.state.pmTime3} pmIcon3={this.state.pmIcon3} pmPop3={this.state.pmPop3} pmWind3={this.state.pmWind3} pmTemp3={this.state.pmTemp3} pmTime2={this.state.pmTime2} pmPop2={this.state.pmPop2} pmWind2={this.state.pmWind2} pmTemp2={this.state.pmTemp2} />
 				</div>
 
 					{/* add Week View container with props values from API parsed response (default CSS style positions it off screen right) */}
@@ -143,8 +143,8 @@ export default class Iphone_Container extends Component {
 		var workLocation = this.state.work;
 		console.log(homeLocation);
 		console.log(workLocation);
-		// Make API calls here...
 
+		// API call for home address
 		var url = "http://api.wunderground.com/api/5d95b7c03397aca9/hourly10day/q/UK/"+homeLocation+".json";
 		$.ajax({
 			url: url,
@@ -153,6 +153,7 @@ export default class Iphone_Container extends Component {
 			error : function(req, err){ console.log('API call failed ' + err); }
 		})
 
+		// API call for work address
 		var url = "http://api.wunderground.com/api/5d95b7c03397aca9/hourly10day/q/UK/"+workLocation+".json";
 		$.ajax({
 			url: url,
@@ -162,51 +163,61 @@ export default class Iphone_Container extends Component {
 		})
 	}
 
+	// catch response from Home Address API call and parse data
 	parseAMResponse = (parsed_json) => {
 		 this.parseResponse(parsed_json, true)
 	}
 
+	// catch response from Work Address API call and parse data
 	parsePMResponse = (parsed_json) => {
 		this.parseResponse(parsed_json, false)
-	}	
+	}
 
+	// extract data from each API response
 	parseResponse = (parsed_json, isAMData) => {
+
+		// Filter response to get only the required forecast objects for commuting hours 
 
 		var startHour = (isAMData) ? parseInt(this.state.amStartHours) : parseInt(this.state.pmStartHours);
 
 		var allHours = parsed_json.hourly_forecast;
 
 		var firstHourObject = this.getFirstHourObject(allHours);
-		
+
 		var todayYearDay = parseInt(firstHourObject['FCTTIME'].yday);
 		var todayDate = parseInt(firstHourObject['FCTTIME'].mday);
 
+		// Determine if commuting hours have passed (commute start hour + 2) - if so retrieve forecast objects for tomorrow
 		if (startHour < parseInt(firstHourObject['FCTTIME'].hour)) {
 			if ((startHour + 2) >= parseInt(firstHourObject['FCTTIME'].hour)) {
 				startHour = parseInt(firstHourObject['FCTTIME'].hour);
 			} else {
 				todayYearDay += 1;
 				if (isAMData) {
-					this.setState({amTomorrowLabel : true})	
+					this.setState({amTomorrowLabel : true})
 				} else {
-					this.setState({pmTomorrowLabel : true})	
+					this.setState({pmTomorrowLabel : true})
 				}
 			}
 		}
 
+		// get forecast objects
 		var hour1Forecast = this.getHourObject(allHours, startHour, todayYearDay);
 		var hour2Forecast = this.getHourObject(allHours, startHour + 1, todayYearDay);
 		var hour3Forecast = this.getHourObject(allHours, startHour + 2, todayYearDay);
 
+		// find most severe weather conditions and temperature from retrieved forecast objects
 		var severeTemperature = this.getSevereTemperature(hour1Forecast, hour2Forecast, hour3Forecast);
 		var severeConditions = this.getSevereConditions(hour1Forecast, hour2Forecast, hour3Forecast);
 
-		var umbrellaOn = this.testUmbrella(severeConditions);
+		// determine whether user should be advised to bring each type of accessory
+		var umbrellaOn = this.testUmbrella(hour1Forecast, hour2Forecast, hour3Forecast);
 		var coatOn = this.testCoat(severeTemperature);
 		var sunglassesOn = this.testSunglasses(hour1Forecast, hour2Forecast, hour3Forecast);
 
 		todayYearDay = parseInt(firstHourObject['FCTTIME'].yday); // reset current year-day
 
+		// get forecast objects for commute start hours - for next 7 days
 		var day1StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 1);
 		var day2StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 2);
 		var day3StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 3);
@@ -215,6 +226,7 @@ export default class Iphone_Container extends Component {
 		var day6StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 6);
 		var day7StartHourForecast = this.getHourObject(allHours, startHour, todayYearDay + 7);
 
+		// set state properties, based on whether the parsed data is from the home or work address API calls
 		if (isAMData) {
 			this.setState({
 				today : firstHourObject['FCTTIME'].weekday_name,
@@ -227,19 +239,19 @@ export default class Iphone_Container extends Component {
 				amCoatOn : coatOn,
 				amSunglassesOn : sunglassesOn,
 
-				amTime1 : this.getHourString(hour1Forecast['FCTTIME'].hour),
+				amTime1 : hour1Forecast['FCTTIME'].hour,
 				amIcon1 : hour1Forecast.icon,
 				amPop1 : hour1Forecast.pop,
 				amWind1 : hour1Forecast.wspd['english'],
 				amTemp1 : hour1Forecast.temp['metric'],
 
-				amTime2 : this.getHourString(hour2Forecast['FCTTIME'].hour),
+				amTime2 : hour2Forecast['FCTTIME'].hour,
 				amIcon2 : hour2Forecast.icon,
 				amPop2 : hour2Forecast.pop,
 				amWind2 : hour2Forecast.wspd['english'],
 				amTemp2 : hour2Forecast.temp['metric'],
 
-				amTime3 : this.getHourString(hour3Forecast['FCTTIME'].hour),
+				amTime3 : hour3Forecast['FCTTIME'].hour,
 				amIcon3 : hour3Forecast.icon,
 				amPop3 : hour3Forecast.pop,
 				amWind3 : hour3Forecast.wspd['english'],
@@ -276,19 +288,19 @@ export default class Iphone_Container extends Component {
 				pmCoatOn : coatOn,
 				pmSunglassesOn : sunglassesOn,
 
-				pmTime1 : this.getHourString(hour1Forecast['FCTTIME'].hour),
+				pmTime1 : hour1Forecast['FCTTIME'].hour,
 				pmIcon1 : hour1Forecast.icon,
 				pmPop1 : hour1Forecast.pop,
 				pmWind1 : hour1Forecast.wspd['english'],
 				pmTemp1 : hour1Forecast.temp['metric'],
 
-				pmTime2 : this.getHourString(hour2Forecast['FCTTIME'].hour),
+				pmTime2 : hour2Forecast['FCTTIME'].hour,
 				pmIcon2 : hour2Forecast.icon,
 				pmPop2 : hour2Forecast.pop,
 				pmWind2 : hour2Forecast.wspd['english'],
 				pmTemp2 : hour2Forecast.temp['metric'],
 
-				pmTime3 : this.getHourString(hour3Forecast['FCTTIME'].hour),
+				pmTime3 : hour3Forecast['FCTTIME'].hour,
 				pmIcon3 : hour3Forecast.icon,
 				pmPop3 : hour3Forecast.pop,
 				pmWind3 : hour3Forecast.wspd['english'],
@@ -307,6 +319,7 @@ export default class Iphone_Container extends Component {
 		}
 	}
 
+	// retreive first Hour forecast object from allHours object
 	getFirstHourObject = (allHours) => {
 		for (var hour in allHours) {
 			if (allHours.hasOwnProperty(hour)) {
@@ -318,26 +331,18 @@ export default class Iphone_Container extends Component {
 		}
 	}
 
+	// retreive specified Hour forecast object from allHours object
 	getHourObject = (allHours, hourNumber, dayNumber) => {
-		// var currentHour = {}; 
-
 		for (var hour in allHours) {
 			if (allHours.hasOwnProperty(hour)) {
 				var hourObject = allHours[hour];
-				// if (hour == 0) {
-					// currentHour = hourObject;
-				// } else
 				 if (hourObject.FCTTIME["hour"] == hourNumber && hourObject.FCTTIME["yday"] == dayNumber) {
 					return hourObject;
-				} 
+				}
 			}
 		}
-		// return currentHour;
 	}
 
-	getHourString = (hour) => {
-		return (parseInt(hour) < 12) ? hour + "am" : (hour - 12) + "pm";
-	}
 
 	// ----- Data Analysis funtions -----
 
@@ -347,27 +352,136 @@ export default class Iphone_Container extends Component {
 		var hour2Temp = parseInt(hour2.temp['metric']);
 		var hour3Temp = parseInt(hour3.temp['metric']);
 
-		var severestTemperature = hour1Temp;
+		var severestTemperature;
+		if (hour1Temp > 10 ) {
+			if (hour1Temp > hour2Temp && hour1Temp >= hour3Temp) {
+				 severestTemperature = hour1Temp;
+			} else if (hour2Temp > hour1Temp && hour2Temp >= hour3Temp) {
+				 severestTemperature = hour2Temp;
+			} else if (hour3Temp > hour1Temp && hour3Temp >= hour2Temp) {
+				 severestTemperature = hour3Temp;
+			} else if (hour1Temp === hour2Temp || hour1Temp === hour3Temp) {
+				 severestTemperature = hour1Temp;
+			}
+		} else if (hour1Temp < 10) {
+			if (hour1Temp < hour2Temp && hour1Temp <= hour3Temp) {
+				 severestTemperature = hour1Temp;
+			} else if (hour2Temp < hour1Temp && hour2Temp <= hour3Temp) {
+				 severestTemperature = hour2Temp;
+			} else if (hour3Temp < hour1Temp && hour3Temp <= hour2Temp) {
+				 severestTemperature = hour3Temp;
+			} else if (hour1Temp === hour2Temp || hour1Temp === hour3Temp) {
+				 severestTemperature = hour1Temp;
+			}
+		}
 
-		// Add logic to determine most severe temperature here...
 
 		return severestTemperature;
 	}
 
 	getSevereConditions = (hour1, hour2, hour3) => {
 		var hour1Conditions = hour1.icon;
-		var hour2Conditions = hour2.temp;
-		var hour3Conditions = hour3.temp;
+		var hour2Conditions = hour2.icon;
+		var hour3Conditions = hour3.icon;
+
 
 		var severestConditions = hour1Conditions;
 
 		// Add logic to determine most severe conditions here...
+		//severest condition hierachy
+			//tstorms
+				if (hour1Conditions == "tstorms") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "tstorms") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "tstorms") {severestConditions = hour3Conditions}
+			//chancetstorms
+				else if (hour1Conditions == "chancetstorms") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancetstorms") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancetstorms") {severestConditions = hour3Conditions}
+			//snow
+				else if (hour1Conditions == "snow") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "snow") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "snow") {severestConditions = hour3Conditions}
+			//chancesnow
+				else if (hour1Conditions == "chancesnow") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancesnow") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancesnow") {severestConditions = hour3Conditions}
+			// sleet
+				else if (hour1Conditions == "sleet") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "sleet") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "sleet") {severestConditions = hour3Conditions}
+			//chancesleet
+				else if (hour1Conditions == "chancesleet") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancesleet") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancesleet") {severestConditions = hour3Conditions}
+			//rain
+				else if (hour1Conditions == "rain") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "rain") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "rain") {severestConditions = hour3Conditions}
+			//chancerain
+				else if (hour1Conditions == "chancerain") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chancerain") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chancerain") {severestConditions = hour3Conditions}
+			//flurries
+				else if (hour1Conditions == "flurries") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "flurries") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "flurries") {severestConditions = hour3Conditions}
+			//chanceflurries
+				else if (hour1Conditions == "chanceflurries") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "chanceflurries") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "chanceflurries") {severestConditions = hour3Conditions}
+			//unknown
+				else if (hour1Conditions == "unknown") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "unknown") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "unknown") {severestConditions = hour3Conditions}
+			//fog
+				else if (hour1Conditions == "fog") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "fog") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "fog") {severestConditions = hour3Conditions}
+			// cloudy
+				else if (hour1Conditions == "cloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "cloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "cloudy") {severestConditions = hour3Conditions}
+			// mostlycloudy
+				else if (hour1Conditions == "mostlycloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "mostlycloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "mostlycloudy") {severestConditions = hour3Conditions}
+			// partlycloudy
+				else if (hour1Conditions == "partlycloudy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "partlycloudy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "partlycloudy") {severestConditions = hour3Conditions}
+			// hazy
+				else if (hour1Conditions == "hazy") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "hazy") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "hazy") {severestConditions = hour3Conditions}
+			// clear
+				else if (hour1Conditions == "clear") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "clear") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "clear") {severestConditions = hour3Conditions}
+			// mostlysunny
+				else if (hour1Conditions == "mostlysunny") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "mostlysunny") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "mostlysunny") {severestConditions = hour3Conditions}
+			// sunny
+				else if (hour1Conditions == "sunny") {severestConditions = hour1Conditions}
+				else if (hour2Conditions == "sunny") {severestConditions = hour2Conditions}
+				else if (hour3Conditions == "sunny") {severestConditions = hour3Conditions}
 
 		return severestConditions;
 	}
 
-	testUmbrella = (conditions) => {
-		var shouldTakeUmbrella = false;
+
+	testUmbrella = (hour1, hour2, hour3) => {
+		var hour1Rain = parseInt(hour1.pop);
+		var hour2Rain = parseInt(hour2.pop);
+		var hour3Rain = parseInt(hour3.pop);
+
+		var shouldTakeUmbrella;
+
+		if (hour1Rain > 20 || hour2Rain > 20 || hour3Rain > 20) {
+			shouldTakeUmbrella = true;
+		} else {
+			shouldTakeUmbrella = false;
+		}
 
 		// Add logic to decide whether to take an umbrella...
 
@@ -375,18 +489,34 @@ export default class Iphone_Container extends Component {
 	}
 
 	testCoat = (temperature) => {
-		var shouldTakeCoat = false;
+		var shouldTakeCoat;
 
-		// Add logic to decide whether to take a coat...
+		if ( temperature < 9) {
+			shouldTakeCoat = true;
+		} else {
+			shouldTakeCoat = false;
+		}
 
 		return shouldTakeCoat;
 	}
 
 	testSunglasses = (hour1, hour2, hour3) => {
+
+		// var hour1Temp = parseInt(hour1.temp['metric']);
+		// var hour2Temp = parseInt(hour2.temp['metric']);
+		// var hour3Temp = parseInt(hour3.temp['metric']);
+
 		var shouldTakeSunglasses = false;
 
-		// Add logic to decide whether to take sunglasses...
+		// if (hour1Temp > 25 || hour2Temp > 25 || hour3Temp > 25) {
+		// 	shouldTakeSunglasses = true;
+		// } else {
+		// 	shouldTakeSunglasses = false;
+		// }
 
+		if (hour1.icon == "sunny" || hour1.icon == "clear" || hour2.icon == "sunny" || hour2.icon == "clear" || hour3.icon == "sunny" || hour3.icon == "clear") {
+			shouldTakeSunglasses = true;
+		}
 		return shouldTakeSunglasses;
 	}
 
@@ -429,7 +559,7 @@ export default class Iphone_Container extends Component {
 			this.setState({settingsBackButtonClassName: style.settingsBackButtonOn});
 		} else {
 			// hide Settings View, navBar title, hide the 'Back' button and show the user-symbol button
-			this.setState({navBarTitle : "Weather App"});
+			this.setState({navBarTitle : "LdnWthr"});
 			this.setState({settingsViewClassName: style.settingsViewOff});
 			this.setState({settingsButtonClassName: style.settingsButtonOn});
 			this.setState({settingsBackTextClassName: style.settingsBackTextOff});
